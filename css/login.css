@@ -1,0 +1,36 @@
+body{
+  font-family : "Lucida Sans Unicode";
+  color : white;
+}
+
+#global{
+  position: absolute;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+}
+
+.panel{
+  background-color: rgba(0,0,0,0.75);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+label{
+  display: inline-block;
+  width: 150px;
+}
+
+#connection, #newsletterDiv, #subscription{
+  margin-top: 20px;
+}
+
+#newsletterDiv label{
+  display: inline-block;
+  width: 330px;
+}
+
+.error{
+  color: red;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formulaire d'inscription</title>
+    <meta charset="UTF-8" />
+	<link rel="stylesheet" href="css/login.css"/>
+  </head>
+	
+  <body>
+    <div id="global">
+
+      <!-- Panel for connection -->
+	  <!--<div class="panel">
+	    <form action="#">
+		  <div>
+		    <div>
+		      <label for="identifier1">Identifiant</label>
+			  <input type="text" id="identifier1" size="20"/>
+			</div>
+			<div>
+			  <label for="password1">Mot de passe</label>
+			  <input type="password" id="password1"/>
+			</div>
+		  </div>
+		  
+		  <div>
+		    <input type="button" id="connection" value="Connexion"/>
+		  </div>
+		</form>
+	  </div>-->
+
+	
+	  <!-- Panel for subscription -->
+      <div class="panel">
+		<form action="inscription.php" method="post">
+		  <div id="credentials">
+		    <div>
+			  <label for="identifier1">Nom d'utilisateur</label>
+			  <input type="text" id="identifier1" name="identifier1" size="20"/>
+			</div>
+			<div>
+			  <label for="password1">Mot de passe</label>
+			  <input type="password" id="password1" name="password1"/>
+			</div>
+			<div>
+			  <label for="password2">Confirmation</label>
+			  <input type="password" id="password2" name="password2"/>
+			</div>
+			<div>
+			  <label for="email">Adresse email</label>
+			  <input type="text" id="email" name="email"/>
+			</div>
+		  </div>
+		  
+		  <!--<div id="newsletterDiv">
+			<input type="checkbox" id="newsletter" name="newsletter"/><label for="newsletter">Recevoir des mails de la part du site</label>
+		  </div>-->
+		  
+		  <div id="subscription">
+		    <input type="submit" value="S'inscrire"/>
+		  </div>			
+		</form>
+	  </div>
+	</div>
+  </body>
+</html>
