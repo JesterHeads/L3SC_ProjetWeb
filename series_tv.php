@@ -80,7 +80,7 @@
             <ul class="genres">
             	<li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=allg">#</a></li>
                 <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Action">Action</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Aventure">Aventure</a></li>
+                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Adventure">Adventure</a></li>
                 <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=ActionAventure">Action & Adventure</a></li>
                 <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Animation">Animation</a></li>
                 <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Comedy">Comedy</a></li>

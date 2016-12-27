@@ -80,7 +80,7 @@
             <ul class="genres">
             	<li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=allg">#</a></li>
                 <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Action">Action</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Aventure">Aventure</a></li>
+                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Adventure">Adventure</a></li>
                 <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=ActionAventure">Action & Adventure</a></li>
                 <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Animation">Animation</a></li>
                 <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Comedy">Comedy</a></li>
@@ -114,7 +114,7 @@
 				echo "<h3>Votre recherche</h3>";
 				if ($_GET['recherche'] == "alll") {
 					$alphabet = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-					for ($i = 0; $i < 26; $i++) {
+					for ($i = 0; $i < 36; $i++) {
 						$lettre = $alphabet[$i];
 						$chaine = "SELECT name FROM series WHERE name LIKE '$lettre%' ORDER BY name";
 						$req = $bdd->query($chaine);
@@ -127,7 +127,7 @@
 						}
 					}
 				} else if ($_GET['recherche'] == "allg") {
-					$genres = ["Action","Aventure","Action & Adventure","Animation","Comedy","Crime","Documentary","Drama","Family","Fantasy","History","Horror","Kids","Music","Mystery","Reality","Romance","News","Science Fiction","Sci-Fi & Fantasy","Soap","Talk","Thriller","TV Movie","War","War & Politics","Western"];
+					$genres = ["Action","Adventure","Action & Adventure","Animation","Comedy","Crime","Documentary","Drama","Family","Fantasy","History","Horror","Kids","Music","Mystery","Reality","Romance","News","Science Fiction","Sci-Fi & Fantasy","Soap","Talk","Thriller","TV Movie","War","War & Politics","Western"];
 					for ($i = 0; $i < 27; $i++) {
 						$genre =  $genres[$i];
 						$chaine = "SELECT series.name FROM seriesgenres, series, genres WHERE genres.name = '$genre' AND genres.id = seriesgenres.genre_id AND seriesgenres.series_id = series.id ORDER BY series.name";
@@ -153,14 +153,32 @@
 						}
 					}
 				} else if (($_GET['recherche'] == "A") || ($_GET['recherche'] == "B") || ($_GET['recherche'] == "C") || ($_GET['recherche'] == "D") || ($_GET['recherche'] == "E") || ($_GET['recherche'] == "F") || ($_GET['recherche'] == "G") || ($_GET['recherche'] == "H") || ($_GET['recherche'] == "I") || ($_GET['recherche'] == "J") || ($_GET['recherche'] == "K") || ($_GET['recherche'] == "L") || ($_GET['recherche'] == "M") || ($_GET['recherche'] == "N") || ($_GET['recherche'] == "O") || ($_GET['recherche'] == "P") || ($_GET['recherche'] == "Q") || ($_GET['recherche'] == "R") || ($_GET['recherche'] == "S") || ($_GET['recherche'] == "T") || ($_GET['recherche'] == "U") || ($_GET['recherche'] == "V") || ($_GET['recherche'] == "W") || ($_GET['recherche'] == "X") || ($_GET['recherche'] == "Y")|| ($_GET['recherche'] == "Z")){
+					//TEST POUR FAIRE LA LISTE DES SAISONS ET EPISODES POUR POUVOIR RECUPERER LES SERIES DANS LA PAGE MES SERIES
+					//LORSQUE L'UTILISATEUR DIT QU'IL A VU CERTAIN EPISODE
 					$lettre = $_GET['recherche'];
-					$chaine = "SELECT name FROM series WHERE name LIKE '$lettre%' ORDER BY name";
+					$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$lettre%'";
 					$req = $bdd->query($chaine);
 					$int = $req->rowCount();
 					if ($int > 0) {
 						echo "<h3>".$lettre."</h3>";
-						while ($res = $req->fetch()) {
-							echo "<p>".$res[0]."</p>";
+						$res = $req->fetchAll();
+						$compareserie = "";
+						$comparesaison = -1;
+						$saison = 1;
+						foreach($res as $value) {
+							if ($compareserie != $value[0]) {
+								$compareserie = $value[0];
+								$saison = 1;
+								$comparesaison = $value[3];
+								echo "<h3 class='nomseries'>".$compareserie."</h3>";
+								echo "<h4 class='numsaison'> Saison n°".$saison."</h4>";
+							}
+							if ($value[3] != $comparesaison) {
+								$comparesaison = $value[3];
+								$saison++;
+								echo "<h4 class='numsaison'> Saison n°".$saison."</h4>";
+							}
+							echo "<p class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
 						}
 					}
 				} else {
