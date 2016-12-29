@@ -48,68 +48,70 @@
 		?>
         <div id="recherche">
         	<ul class="alphabet">
-            	<li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=alll">#</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=0">0-9</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=A">A</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=B">B</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=C">C</a></li>
-            	<li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=D">D</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=E">E</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=F">F</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=G">G</a></li>
-            	<li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=H">H</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=I">I</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=J">J</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=K">K</a></li>
-            	<li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=L">L</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=M">M</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=N">N</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=O">O</a></li>
-            	<li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=P">P</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Q">Q</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=R">R</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=S">S</a></li>
-            	<li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=T">T</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=U">U</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=V">V</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=W">W</a></li>
-            	<li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=X">X</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Y">Y</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Z">Z</a></li>
+            	<li><a href="series_tv_%23.php?recherche=alll">#</a></li>
+                <li><a href="series_tv_%23.php?recherche=0">0-9</a></li>
+                <li><a href="series_tv_%23.php?recherche=A">A</a></li>
+                <li><a href="series_tv_%23.php?recherche=B">B</a></li>
+                <li><a href="series_tv_%23.php?recherche=C">C</a></li>
+            	<li><a href="series_tv_%23.php?recherche=D">D</a></li>
+                <li><a href="series_tv_%23.php?recherche=E">E</a></li>
+                <li><a href="series_tv_%23.php?recherche=F">F</a></li>
+                <li><a href="series_tv_%23.php?recherche=G">G</a></li>
+            	<li><a href="series_tv_%23.php?recherche=H">H</a></li>
+                <li><a href="series_tv_%23.php?recherche=I">I</a></li>
+                <li><a href="series_tv_%23.php?recherche=J">J</a></li>
+                <li><a href="series_tv_%23.php?recherche=K">K</a></li>
+            	<li><a href="series_tv_%23.php?recherche=L">L</a></li>
+                <li><a href="series_tv_%23.php?recherche=M">M</a></li>
+                <li><a href="series_tv_%23.php?recherche=N">N</a></li>
+                <li><a href="series_tv_%23.php?recherche=O">O</a></li>
+            	<li><a href="series_tv_%23.php?recherche=P">P</a></li>
+                <li><a href="series_tv_%23.php?recherche=Q">Q</a></li>
+                <li><a href="series_tv_%23.php?recherche=R">R</a></li>
+                <li><a href="series_tv_%23.php?recherche=S">S</a></li>
+            	<li><a href="series_tv_%23.php?recherche=T">T</a></li>
+                <li><a href="series_tv_%23.php?recherche=U">U</a></li>
+                <li><a href="series_tv_%23.php?recherche=V">V</a></li>
+                <li><a href="series_tv_%23.php?recherche=W">W</a></li>
+            	<li><a href="series_tv_%23.php?recherche=X">X</a></li>
+                <li><a href="series_tv_%23.php?recherche=Y">Y</a></li>
+                <li><a href="series_tv_%23.php?recherche=Z">Z</a></li>
             </ul>
             <ul class="genres">
-            	<li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=allg">#</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Action">Action</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Adventure">Adventure</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=ActionAventure">Action & Adventure</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Animation">Animation</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Comedy">Comedy</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Crime">Crime</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Documentary">Documentary</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Drama">Drama</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Family">Family</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Fantasy">Fantasy</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=History">History</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Horror">Horror</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Kids">Kids</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Music">Music</a></li> 
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Mystery">Mystery</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Reality">Reality</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Romance">Romance</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=News">News</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Science Fiction">Science Fiction</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Sci-FiFantasy">Sci-Fi & Fantasy</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Soap">Soap</a></li> 
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Talk">Talk</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Thriller">Thriller</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=TV Movie">TV Movie</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=War">War</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=WarPolitics">War & Politics</a></li>
-                <li><a href="http://127.0.0.1/Projet/series_tv_%23.php?recherche=Western">Western</a></li>
+            	<li><a href="series_tv_%23.php?recherche=allg">#</a></li>
+                <li><a href="series_tv_%23.php?recherche=Action">Action</a></li>
+                <li><a href="series_tv_%23.php?recherche=Adventure">Adventure</a></li>
+                <li><a href="series_tv_%23.php?recherche=ActionAventure">Action & Adventure</a></li>
+                <li><a href="series_tv_%23.php?recherche=Animation">Animation</a></li>
+                <li><a href="series_tv_%23.php?recherche=Comedy">Comedy</a></li>
+                <li><a href="series_tv_%23.php?recherche=Crime">Crime</a></li>
+                <li><a href="series_tv_%23.php?recherche=Documentary">Documentary</a></li>
+                <li><a href="series_tv_%23.php?recherche=Drama">Drama</a></li>
+                <li><a href="series_tv_%23.php?recherche=Family">Family</a></li>
+                <li><a href="series_tv_%23.php?recherche=Fantasy">Fantasy</a></li>
+                <li><a href="series_tv_%23.php?recherche=History">History</a></li>
+                <li><a href="series_tv_%23.php?recherche=Horror">Horror</a></li>
+                <li><a href="series_tv_%23.php?recherche=Kids">Kids</a></li>
+                <li><a href="series_tv_%23.php?recherche=Music">Music</a></li> 
+                <li><a href="series_tv_%23.php?recherche=Mystery">Mystery</a></li>
+                <li><a href="series_tv_%23.php?recherche=Reality">Reality</a></li>
+                <li><a href="series_tv_%23.php?recherche=Romance">Romance</a></li>
+                <li><a href="series_tv_%23.php?recherche=News">News</a></li>
+                <li><a href="series_tv_%23.php?recherche=Science Fiction">Science Fiction</a></li>
+                <li><a href="series_tv_%23.php?recherche=Sci-FiFantasy">Sci-Fi & Fantasy</a></li>
+                <li><a href="series_tv_%23.php?recherche=Soap">Soap</a></li> 
+                <li><a href="series_tv_%23.php?recherche=Talk">Talk</a></li>
+                <li><a href="series_tv_%23.php?recherche=Thriller">Thriller</a></li>
+                <li><a href="series_tv_%23.php?recherche=TV Movie">TV Movie</a></li>
+                <li><a href="series_tv_%23.php?recherche=War">War</a></li>
+                <li><a href="series_tv_%23.php?recherche=WarPolitics">War & Politics</a></li>
+                <li><a href="series_tv_%23.php?recherche=Western">Western</a></li>
             </ul>
         </div>
 		<div id="#alphabet">
         	<?php
+
+			$urlImg="https://image.tmdb.org/t/p/w300"; //debut de l'url pour afficher le poster correspondant a une série
 				//La variable qui correspond à la lettre choisi dans la liste de recherche par alphabet
 				echo "<h3>Votre recherche</h3>";
 				if ($_GET['recherche'] == "alll") {
@@ -156,31 +158,48 @@
 					//TEST POUR FAIRE LA LISTE DES SAISONS ET EPISODES POUR POUVOIR RECUPERER LES SERIES DANS LA PAGE MES SERIES
 					//LORSQUE L'UTILISATEUR DIT QU'IL A VU CERTAIN EPISODE
 					$lettre = $_GET['recherche'];
-					$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$lettre%'";
+					$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$lettre%' ORDER BY series.name";
 					$req = $bdd->query($chaine);
 					$int = $req->rowCount();
 					if ($int > 0) {
+
+
 						echo "<h3>".$lettre."</h3>";
 						$res = $req->fetchAll();
-						$compareserie = "";
+						$compareserie = $res[0][0];
+						$premierAffiche=$urlImg.$res[0][8];
+						echo "<div class='serie'>" . $compareserie."<br><img hidden src='$premierAffiche' alt='affiche de la série'>";
+						echo "<p hidden>Nombre de saisons :".$res[0][5]." Nombre d'épisodes :".$res[0][4]."<br>Résumé : ".$res[0][6]."<br>Popularité : ".$res[0][7]."</p>";
 						$comparesaison = -1;
 						$saison = 1;
+
 						foreach($res as $value) {
 							if ($compareserie != $value[0]) {
+								echo "</div>";
 								$compareserie = $value[0];
-								$saison = 1;
+								$saison=1;
 								$comparesaison = $value[3];
-								echo "<h3 class='nomseries'>".$compareserie."</h3>";
-								echo "<h4 class='numsaison'> Saison n°".$saison."</h4>";
+								$afficheSerie=$urlImg.$value[8];
+								echo "<div class='serie'>" . $compareserie."<br><img hidden src='$afficheSerie' alt='affiche de la série'>";
+								echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
+								echo "<h4 hidden class='numsaison'> Saison n°".$saison."</h4>";
+								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+							} else {
+								if ($value[3] != $comparesaison) {
+
+									$comparesaison = $value[3];
+									$saison++;
+									echo "<h4 hidden class='numsaison'> Saison n°".$saison."</h4>";
+
+								}
+								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+
 							}
-							if ($value[3] != $comparesaison) {
-								$comparesaison = $value[3];
-								$saison++;
-								echo "<h4 class='numsaison'> Saison n°".$saison."</h4>";
-							}
-							echo "<p class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+
 						}
-					}
+
+						}
+
 				} else {
 					if ($_GET['recherche'] == "ActionAventure") {
 						$genre = "Action & Adventure";
@@ -225,5 +244,8 @@
 			</div>
 			<div class="copyright">&copy;  2016 Tous droits réservés.<br>Site réalisé par Sophie, Jeanne, Benjamin et Thomas.</div>
         </footer>
+	<script type="text/javascript" src="javascript/jquery.js"></script>
+	<script type="text/javascript"  src="javascript/series.js"></script>
+
     </body>
 </html>
