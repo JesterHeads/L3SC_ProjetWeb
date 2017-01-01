@@ -118,16 +118,48 @@
 					$alphabet = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 					for ($i = 0; $i < 36; $i++) {
 						$lettre = $alphabet[$i];
-						$chaine = "SELECT name FROM series WHERE name LIKE '$lettre%' ORDER BY name";
+						echo '</div>';
+						$chaine = "SELECT series.name,series.number_of_seasons, series.number_of_episodes,series.overview,series.popularity,series.poster_path, episodes.name, episodes.number, seriesseasons.season_id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$lettre%' ORDER BY series.name";
 						$req = $bdd->query($chaine);
 						$int = $req->rowCount();
 						if ($int > 0) {
 							echo "<h3>".$lettre."</h3>";
-							while ($res = $req->fetch()) {
-								echo "<p>".$res[0]."</p>";
+							$res = $req->fetchAll();
+							$compareserie = $res[0][0];
+							$premierAffiche=$urlImg.$res[0][5];
+							echo "<div class='serie'>" . $compareserie."<br><img hidden src='$premierAffiche' alt='affiche de la série'>";
+							echo "<p hidden>Nombre de saisons :".$res[0][1]." Nombre d'épisodes :".$res[0][2]."<br>Résumé : ".$res[0][3]."<br>Popularité : ".$res[0][4]."</p>";
+							$comparesaison = -1;
+							$saison = 1;
+
+							foreach($res as $value) {
+								if ($compareserie != $value[0]) {
+									echo "</div>";
+									$compareserie = $value[0];
+									$saison=1;
+									$comparesaison = $value[8];
+									$afficheSerie=$urlImg.$value[5];
+									echo "<div class='serie'>" . $compareserie."<br><img hidden src='$afficheSerie' alt='affiche de la série'>";
+									echo "<p hidden>Nombre de saisons :".$value[1]." Nombre d'épisodes :".$value[2]."<br>Résumé : ".$value[3]."<br>Popularité : ".$value[4]."</p>";
+									echo "<h4 hidden class='numsaison'> Saison n°".$saison."</h4>";
+									echo "<p hidden class='nomepisode'>Episode n°".$value[7]." : ".$value[6]."</p>";
+								} else {
+									if ($value[8] != $comparesaison) {
+
+										$comparesaison = $value[8];
+										$saison++;
+										echo "<h4 hidden class='numsaison'> Saison n°".$saison."</h4>";
+
+									}
+									echo "<p hidden class='nomepisode'>Episode n°".$value[7]." : ".$value[6]."</p>";
+
+								}
+
 							}
+
 						}
-					}
+						}
+
 				} else if ($_GET['recherche'] == "allg") {
 					$genres = ["Action","Adventure","Action & Adventure","Animation","Comedy","Crime","Documentary","Drama","Family","Fantasy","History","Horror","Kids","Music","Mystery","Reality","Romance","News","Science Fiction","Sci-Fi & Fantasy","Soap","Talk","Thriller","TV Movie","War","War & Politics","Western"];
 					for ($i = 0; $i < 27; $i++) {
@@ -169,7 +201,7 @@
 						echo "<div class='serie'>" . $compareserie."<br><img hidden src='$premierAffiche' alt='affiche de la série'>";
 						echo "<p hidden>Nombre de saisons :".$res[0][5]." Nombre d'épisodes :".$res[0][4]."<br>Résumé : ".$res[0][6]."<br>Popularité : ".$res[0][7]."</p>";
 						$comparesaison = -1;
-						$saison = 1;
+						$saison = 0;
 
 						foreach($res as $value) {
 							if ($compareserie != $value[0]) {
@@ -208,13 +240,42 @@
 					} else {
 						$genre = $_GET['recherche'];	
 					}
-					$chaine = "SELECT series.name FROM seriesgenres, series, genres WHERE genres.name = '$genre' AND genres.id = seriesgenres.genre_id AND seriesgenres.series_id = series.id ORDER BY series.name";
+					$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path FROM seriesgenres, series, genres, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND genres.name = '$genre' AND genres.id = seriesgenres.genre_id AND seriesgenres.series_id = series.id ORDER BY series.name";
 					$req = $bdd->query($chaine);
 					$int = $req->rowCount();
 					if ($int > 0) {
 						echo "<h3>".$genre."</h3>";
-						while ($res = $req->fetch()) {
-							echo "<p>".$res[0]."</p>";
+						$res = $req->fetchAll();
+						$compareserie = $res[0][0];
+						$premierAffiche=$urlImg.$res[0][8];
+						echo "<div class='serie'>" . $compareserie."<br><img hidden src='$premierAffiche' alt='affiche de la série'>";
+						echo "<p hidden>Nombre de saisons :".$res[0][5]." Nombre d'épisodes :".$res[0][4]."<br>Résumé : ".$res[0][6]."<br>Popularité : ".$res[0][7]."</p>";
+						$comparesaison = -1;
+						$saison = 0;
+
+						foreach($res as $value) {
+							if ($compareserie != $value[0]) {
+								echo "</div>"; //fermeture de la div de la serie précédente
+								$compareserie = $value[0];
+								$saison=1;
+								$comparesaison = $value[3];
+								$afficheSerie=$urlImg.$value[8];
+								echo "<div class='serie'>" . $compareserie."<br><img hidden src='$afficheSerie' alt='affiche de la série'>";
+								echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
+								echo "<h4 hidden class='numsaison'> Saison n°".$saison."</h4>";
+								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+							} else {
+								if ($value[3] != $comparesaison) {
+
+									$comparesaison = $value[3];
+									$saison++;
+									echo "<h4 hidden class='numsaison'> Saison n°".$saison."</h4>";
+
+								}
+								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+
+							}
+
 						}
 					}
 				}
