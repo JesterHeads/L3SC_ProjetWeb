@@ -3,7 +3,7 @@
     <head>
         <title>Cinéfix</title>
         <meta charset="UTF-8" />
-        <link rel="Stylesheet" href="css/header.css" type="Text/css"/>
+        <link rel="stylesheet" href="css/style.css" type="text/css"/>
         <link rel="stylesheet" href="css/footer.css" type="text/css"/>
     </head>
     <body>
@@ -113,7 +113,8 @@
             </div>
         </div>
         <div id="description">
-        
+        	<h3>BONJOUR A TOUS !</h3>
+            <p>blablablablablablablablablablablablablablablablablablablablablablablabla</p>
         </div>
         <div id="topseries">
         	<h3>TOP SERIES</h3>
@@ -128,18 +129,24 @@
                 	<?php
 						$data = $req->fetch();
 						echo "<p>".$data['name']."</p>";
+						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
+						echo "<img src='$affiche'></img>";
 					?>
                 </li>
                 <li>
                     <?php
 						$data = $req->fetch();
 						echo "<p>".$data['name']."</p>";
+						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
+						echo "<img src='$affiche'></img>";
 					?>
                 </li>
                 <li>
                     <?php
 						$data = $req->fetch();
 						echo "<p>".$data['name']."</p>";
+						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
+						echo "<img src='$affiche'></img>";
 					?>
                 </li>
             </ul>
