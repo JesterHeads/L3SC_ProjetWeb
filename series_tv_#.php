@@ -198,28 +198,30 @@
 						$res = $req->fetchAll();
 						$compareserie = $res[0][0];
 						$premierAffiche=$urlImg.$res[0][8];
+						$comparesaison = $res[0][3];
+						$saison = 1;
 						echo "<div class='serie'>" . $compareserie."<br><img hidden src='$premierAffiche' alt='affiche de la série'>";
 						echo "<p hidden>Nombre de saisons :".$res[0][5]." Nombre d'épisodes :".$res[0][4]."<br>Résumé : ".$res[0][6]."<br>Popularité : ".$res[0][7]."</p>";
-						$comparesaison = -1;
-						$saison = 0;
+						echo "<div hidden class='numsaison'> Saison n°".$saison;
+
 
 						foreach($res as $value) {
 							if ($compareserie != $value[0]) {
-								echo "</div>";
+								echo "</div></div>";
 								$compareserie = $value[0];
 								$saison=1;
 								$comparesaison = $value[3];
 								$afficheSerie=$urlImg.$value[8];
 								echo "<div class='serie'>" . $compareserie."<br><img hidden src='$afficheSerie' alt='affiche de la série'>";
 								echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
-								echo "<h4 hidden class='numsaison'> Saison n°".$saison."</h4>";
+								echo "<div hidden class='numsaison'> Saison n°".$saison;
 								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
 							} else {
 								if ($value[3] != $comparesaison) {
-
+									echo '</div>';
 									$comparesaison = $value[3];
 									$saison++;
-									echo "<h4 hidden class='numsaison'> Saison n°".$saison."</h4>";
+									echo "<div hidden class='numsaison'> Saison n°".$saison;
 
 								}
 								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
