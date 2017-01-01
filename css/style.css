@@ -112,14 +112,14 @@ body {
 	border: 1px dashed #EBF2F1;
 }
 
-#description {
+#description, #topseries, #randseries, #result {
 	margin-top: 30px;
 	border: 1px dashed #4E4D4D;	
 	color:#FFF;
 	text-align:center;
 }
 
-#description h3 {
+#description h3, #topseries h3, #randseries h3, #result h3 {
 	background:#4E4D4D;
 	margin-top:-20px;
 	margin-left:auto;
@@ -128,22 +128,7 @@ body {
 	padding:1%;
 }
 
-#topseries {
-	margin-top: 30px;
-	border: 1px dashed #4E4D4D;	
-	color:#FFF;
-	text-align:center;
-}
-#topseries h3 {
-	background:#4E4D4D;
-	margin-top:-20px;
-	margin-left:auto;
-	margin-right:auto;
-	width:400px;
-	padding:1%;
-}
-
-#topseries ul li {
+#topseries ul li, #randseries ul li {
 	display:inline-block;
 	border:1px solid #FFF;
 	text-transform:uppercase;
@@ -151,7 +136,16 @@ body {
 	padding:2%;
 }
 
-#topseries img {
+#topseries img, #randseries img {
 	height:400px;
 	width:300px;	
+}
+
+#result h4 {
+	background:#4E4D4D;
+	margin-top:-5px;
+	margin-left:auto;
+	margin-right:auto;
+	width:200px;
+	padding:0.5;
 }

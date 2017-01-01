@@ -130,7 +130,11 @@
 						$data = $req->fetch();
 						echo "<p>".$data['name']."</p>";
 						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
-						echo "<img src='$affiche'></img>";
+						if ($data['poster_path']==NULL) {
+							echo "<img src='images/indisponible.png'></img>";
+						} else {
+							echo "<img src='$affiche'></img>";
+						}
 					?>
                 </li>
                 <li>
@@ -138,7 +142,11 @@
 						$data = $req->fetch();
 						echo "<p>".$data['name']."</p>";
 						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
-						echo "<img src='$affiche'></img>";
+						if ($data['poster_path']==NULL) {
+							echo "<img src='images/indisponible.png'></img>";
+						} else {
+							echo "<img src='$affiche'></img>";
+						}
 					?>
                 </li>
                 <li>
@@ -146,7 +154,11 @@
 						$data = $req->fetch();
 						echo "<p>".$data['name']."</p>";
 						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
-						echo "<img src='$affiche'></img>";
+						if ($data['poster_path']==NULL) {
+							echo "<img src='images/indisponible.png'></img>";
+						} else {
+							echo "<img src='$affiche'></img>";
+						}
 					?>
                 </li>
             </ul>
@@ -163,18 +175,36 @@
                 	<?php
 						$data = $req->fetch();
 						echo "<div class=\"serie\">".$data['name']."</div>";
+						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
+						if ($data['poster_path']==NULL) {
+							echo "<img src='images/indisponible.png'></img>";
+						} else {
+							echo "<img src='$affiche'></img>";
+						}
 					?>
                 </li>
                 <li>
                     <?php
 						$data = $req->fetch();
 						echo "<div class=\"serie\">".$data['name']."</div>";
+						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
+						if ($data['poster_path']==NULL) {
+							echo "<img src='images/indisponible.png'></img>";
+						} else {
+							echo "<img src='$affiche'></img>";
+						}
 					?>
                 </li>
                 <li>
                     <?php
 						$data = $req->fetch();
 						echo "<div class=\"serie\">".$data['name']."</div>";
+						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
+						if ($data['poster_path']==NULL) {
+							echo "<img src='images/indisponible.png'></img>";
+						} else {
+							echo "<img src='$affiche'></img>";
+						}
 					?>
                 </li>
             </ul> 

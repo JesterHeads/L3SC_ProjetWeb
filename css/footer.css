@@ -10,7 +10,7 @@ footer {
 
 footer .content {
     padding: 20px 0;
-    font-size: 12px;
+    font-size: 15px;
     margin: 0 auto;
     max-width: 1200px;
     position: relative;
@@ -33,8 +33,8 @@ footer .content {
     color: white;
 }
 .social {
-    position: absolute;
-    right: 0;
+    position: relative;
+    left: 1000px;
     top: 10px;
     color: #778888;
 }
@@ -50,5 +50,6 @@ footer .content {
 }
 .copyright {
     color: #778888;
-    margin-top: 5px;
+	margin-top: 0px;
+	float : top;
 }
