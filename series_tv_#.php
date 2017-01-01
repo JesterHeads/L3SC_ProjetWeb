@@ -162,8 +162,6 @@
 					$req = $bdd->query($chaine);
 					$int = $req->rowCount();
 					if ($int > 0) {
-
-
 						echo "<h3>".$lettre."</h3>";
 						$res = $req->fetchAll();
 						$compareserie = $res[0][0];

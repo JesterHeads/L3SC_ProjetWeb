@@ -1,0 +1,99 @@
+@charset "utf-8";
+/* CSS Document */
+
+h1 {
+	background:#6E6E6E;
+	color:#000;
+	padding:3%;
+	text-align:center;
+}
+
+h2 {
+	margin-top:-19px;
+	background:#6E6E6E;
+	color:#000;
+	padding:2%;
+	text-align:center;
+}
+
+body {
+	background:#292626;
+}
+
+#onglets{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	left: 0;
+	text-align:center;
+	background:#000000;
+}
+#onglets ul li {
+	display:inline-block;
+	padding: 1%;
+	border:1px transparent dashed;
+	text-transform:uppercase;
+	color:#EBF2F1;
+}
+
+#onglets ul li a {
+	text-decoration:none;
+	color:#B9B7B7;
+}
+
+#onglets ul li a:hover {
+	color:#EBF2F1;
+}
+
+#Ralphabet{
+	margin-top: 10px;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	left: 0;
+	text-align:center;
+	background:#000000;
+}
+#Ralphabet ul li {
+	display:inline-block;
+	padding: 1%;
+	border:1px transparent dashed;
+	text-transform:uppercase;
+	color:#EBF2F1;
+}
+
+#Ralphabet ul li a {
+	text-decoration:none;
+	color:#B9B7B7;
+}
+
+#Ralphabet ul li:hover {
+	color:#EBF2F1;
+}
+
+#Rgenres{
+	margin-top: 2px;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	left: 0;
+	text-align:center;
+	background:#000000;
+}
+#Rgenres ul li {
+	display:inline-block;
+	padding: 1%;
+	border:1px transparent dashed;
+	text-transform:uppercase;
+	color:#EBF2F1;
+}
+
+#Rgenres ul li a {
+	text-decoration:none;
+	color:#B9B7B7;
+}
+
+#Rgenres ul li:hover {
+	color:#EBF2F1;
+	border: 1px dashed #EBF2F1;
+}
