@@ -174,7 +174,7 @@
             	<li>
                 	<?php
 						$data = $req->fetch();
-						echo "<div class=\"serie\">".$data['name']."</div>";
+						echo "<div>".$data['name']."</div>";
 						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
 						if ($data['poster_path']==NULL) {
 							echo "<img src='images/indisponible.png'></img>";
@@ -186,7 +186,7 @@
                 <li>
                     <?php
 						$data = $req->fetch();
-						echo "<div class=\"serie\">".$data['name']."</div>";
+						echo "<div>".$data['name']."</div>";
 						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
 						if ($data['poster_path']==NULL) {
 							echo "<img src='images/indisponible.png'></img>";
@@ -198,7 +198,7 @@
                 <li>
                     <?php
 						$data = $req->fetch();
-						echo "<div class=\"serie\">".$data['name']."</div>";
+						echo "<div>".$data['name']."</div>";
 						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
 						if ($data['poster_path']==NULL) {
 							echo "<img src='images/indisponible.png'></img>";

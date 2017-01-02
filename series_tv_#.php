@@ -6,7 +6,7 @@
         <link rel="Stylesheet" href="css/style.css" type="Text/css"/>
         <link rel="stylesheet" href="css/footer.css" type="text/css"/>
     </head>
-    <body>
+    <body>	
         <header>
             <h1>CiNéFiX</h1>
             <h2>Vos séries sur demande</h2>
@@ -125,6 +125,7 @@
 						$req = $bdd->query($chaine);
 						$int = $req->rowCount();
 						if ($int > 0) {
+							echo "<div class='step'>";
 							echo "<h4>".$lettre."</h4>";
 							$res = $req->fetchAll();
 							$compareserie = $res[0][0];
@@ -133,27 +134,29 @@
 							echo "<p hidden>Nombre de saisons :".$res[0][1]." Nombre d'épisodes :".$res[0][2]."<br>Résumé : ".$res[0][3]."<br>Popularité : ".$res[0][4]."</p>";
 							$comparesaison = -1;
 							$saison = 1;
+							echo "<div hidden class='numsaison'>";
 							foreach($res as $value) {
 								if ($compareserie != $value[0]) {
-									echo "</div>";
+									echo "</div></div>";
 									$compareserie = $value[0];
 									$saison=1;
 									$comparesaison = $value[8];
 									$afficheSerie=$urlImg.$value[5];
 									echo "<div class='serie'>" . $compareserie."<br><img hidden src='$afficheSerie' alt='affiche de la série'>";
 									echo "<p hidden>Nombre de saisons :".$value[1]." Nombre d'épisodes :".$value[2]."<br>Résumé : ".$value[3]."<br>Popularité : ".$value[4]."</p>";
-									echo "<h5 hidden class='numsaison'> Saison n°".$saison."</h5>";
+									echo "<div hidden class='numsaison'> Saison n°".$saison;
 									echo "<p hidden class='nomepisode'>Episode n°".$value[7]." : ".$value[6]."</p>";
 								} else {
 									if ($value[8] != $comparesaison) {
-
+										echo "</div>";
 										$comparesaison = $value[8];
 										$saison++;
-										echo "<h5 hidden class='numsaison'> Saison n°".$saison."</h5>";
+										echo "<div hidden class='numsaison'> Saison n°".$saison;
 									}
 									echo "<p hidden class='nomepisode'>Episode n°".$value[7]." : ".$value[6]."</p>";
 								}
 							}
+							echo "</div></div></div>";
 						}
 					}
 				} else if ($_GET['recherche'] == "allg") {
@@ -164,22 +167,26 @@
 						$req = $bdd->query($chaine);
 						$int = $req->rowCount();
 						if ($int > 0) {
+							echo "<div class='step'>";
 							echo "<h4>".$genre."</h4>";
 							while ($res = $req->fetch()) {
 								echo "<p>".$res[0]."</p>";
 							}
+							echo "</div>";
 						}
-					  }
+					}
 				} else if ($_GET['recherche'] == "0") {
 					for ($i = 0; $i < 10; $i++) {
 						$chaine = "SELECT name FROM series WHERE name LIKE '$i%' ORDER BY name";
 						$req = $bdd->query($chaine);
 						$int = $req->rowCount();
 						if ($int > 0) {
+							echo "<div class='step'>";
 							echo "<h4>".$i."</h4>";
 							while ($res = $req->fetch()) {
 								echo "<p>".$res[0]."</p>";
 							}
+							echo "</div>";
 						}
 					}
 				} else if (($_GET['recherche'] == "A") || ($_GET['recherche'] == "B") || ($_GET['recherche'] == "C") || ($_GET['recherche'] == "D") || ($_GET['recherche'] == "E") || ($_GET['recherche'] == "F") || ($_GET['recherche'] == "G") || ($_GET['recherche'] == "H") || ($_GET['recherche'] == "I") || ($_GET['recherche'] == "J") || ($_GET['recherche'] == "K") || ($_GET['recherche'] == "L") || ($_GET['recherche'] == "M") || ($_GET['recherche'] == "N") || ($_GET['recherche'] == "O") || ($_GET['recherche'] == "P") || ($_GET['recherche'] == "Q") || ($_GET['recherche'] == "R") || ($_GET['recherche'] == "S") || ($_GET['recherche'] == "T") || ($_GET['recherche'] == "U") || ($_GET['recherche'] == "V") || ($_GET['recherche'] == "W") || ($_GET['recherche'] == "X") || ($_GET['recherche'] == "Y")|| ($_GET['recherche'] == "Z")){
@@ -188,35 +195,40 @@
 					$req = $bdd->query($chaine);
 					$int = $req->rowCount();
 					if ($int > 0) {
+						echo "<div class='step'>";
 						echo "<h4>".$lettre."</h4>";
 						$res = $req->fetchAll();
 						$compareserie = $res[0][0];
 						$premierAffiche=$urlImg.$res[0][8];
+						$comparesaison = $res[0][3];
+						$saison = 1;
 						echo "<div class='serie'>" . $compareserie."<br><img hidden src='$premierAffiche' alt='affiche de la série'>";
 						echo "<p hidden>Nombre de saisons :".$res[0][5]." Nombre d'épisodes :".$res[0][4]."<br>Résumé : ".$res[0][6]."<br>Popularité : ".$res[0][7]."</p>";
 						$comparesaison = -1;
 						$saison = 0;
+						echo "<div hidden class='numsaison'>";
 						foreach($res as $value) {
 							if ($compareserie != $value[0]) {
-								echo "</div>";
+								echo "</div></div>";
 								$compareserie = $value[0];
 								$saison=1;
 								$comparesaison = $value[3];
 								$afficheSerie=$urlImg.$value[8];
 								echo "<div class='serie'>" . $compareserie."<br><img hidden src='$afficheSerie' alt='affiche de la série'>";
 								echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
-								echo "<h5 hidden class='numsaison'> Saison n°".$saison."</h5>";
+								echo "<div hidden class='numsaison'> Saison n°".$saison;
 								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
 							} else {
 								if ($value[3] != $comparesaison) {
-
+									echo '</div>';
 									$comparesaison = $value[3];
 									$saison++;
-									echo "<h5 hidden class='numsaison'> Saison n°".$saison."</h5>";
+									echo "<div hidden class='numsaison'> Saison n°".$saison;
 								}
 								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
 							}
 						}
+						echo "</div></div></div>";
 					}
 				} else {
 					if ($_GET['recherche'] == "ActionAventure") {
@@ -232,6 +244,7 @@
 					$req = $bdd->query($chaine);
 					$int = $req->rowCount();
 					if ($int > 0) {
+						echo "<div class='step'>";
 						echo "<h4>".$genre."</h4>";
 						$res = $req->fetchAll();
 						$compareserie = $res[0][0];
@@ -240,58 +253,57 @@
 						echo "<p hidden>Nombre de saisons :".$res[0][5]." Nombre d'épisodes :".$res[0][4]."<br>Résumé : ".$res[0][6]."<br>Popularité : ".$res[0][7]."</p>";
 						$comparesaison = -1;
 						$saison = 0;
+						echo "<div hidden class='numsaison'>";
 						foreach($res as $value) {
 							if ($compareserie != $value[0]) {
-								echo "</div>"; //fermeture de la div de la serie précédente
+								echo "</div></div>"; //fermeture de la div de la serie précédente
 								$compareserie = $value[0];
 								$saison=1;
 								$comparesaison = $value[3];
 								$afficheSerie=$urlImg.$value[8];
 								echo "<div class='serie'>" . $compareserie."<br><img hidden src='$afficheSerie' alt='affiche de la série'>";
 								echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
-								echo "<h5 hidden class='numsaison'> Saison n°".$saison."</h5>";
+								echo "<div hidden class='numsaison'> Saison n°".$saison;
 								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
 							} else {
 								if ($value[3] != $comparesaison) {
-
+									echo "</div>";
 									$comparesaison = $value[3];
 									$saison++;
-									echo "<h5 hidden class='numsaison'> Saison n°".$saison."</h5>";
+									echo "<div hidden class='numsaison'> Saison n°".$saison;
 								}
 								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
 							}
 						}
+						echo "</div></div></div>";
 					}
 				}
 				
 			?>
         </div>
         <footer>
-            </div>
+        	<div class="content">
             <?php
             	if(!isset($_SESSION['user']) || empty($_SESSION['user'])){
 			?>
-            <div class="content">
 				<ul class="links">
 					<li><a href="series_tv.php">Accueil</a></li>
                     <li><a href="">Connexion</a></li>
                     <li><a href="">Inscription</a></li>
 				</ul>
-			</div>
             <?php 
 				} else {
 			?>
-            <div class="content">
 				<ul class="links">
 					<li><a href="series_tv.php">Accueil</a></li>
                     <li><a href="">Mon compte</a></li>
                     <li><a href="">Mes séries</a></li>
                     <li><a href="">Mes recommandations</a></li>
 				</ul>
-			</div>
-            <?php
+			<?php
 				}
 			?>
+            </div>
 			<div class="social">
 				<span>Rejoignez-nous sur les réseaux sociaux<br></span>
 				<a href="https://www.facebook.com/" title="facebook">
@@ -308,6 +320,5 @@
         </footer>
 	<script type="text/javascript" src="javascript/jquery.js"></script>
 	<script type="text/javascript"  src="javascript/series.js"></script>
-
     </body>
 </html>
