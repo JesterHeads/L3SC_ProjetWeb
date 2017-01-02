@@ -75,19 +75,29 @@
 						echo "<div class='step'>";
 						echo "<h4>".$res[0]."</h4>";
 						$serie = $res[0];
-						$chaine2 = "SELECT episodes.name, episodes.number, seriesseasons.season_id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name = '$res[0]'";
+						$chaine2 = "SELECT episodes.name, episodes.number, seriesseasons.season_id, episodes.id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name = '$res[0]'";
 						$req2 = $bdd->query($chaine2);
+						$res2 = $req2->fetchAll();
 						$comparesaison = -1;
-						$saison = 0;														
-						while ($res2 = $req2->fetch()) {
-							if ($res2[2] != $comparesaison) {
-								$comparesaison = $res2[2];
+						$saison = 0;	
+						echo "<div>";													
+						foreach ($res2 as $value) {
+							if ($value[2] != $comparesaison) {
+								echo "</div>";
+								$comparesaison = $value[2];
 								$saison++;
-								echo "<div class='numsaison'> Saison n°".$saison;
+								echo "<div class='serie'> Saison n°".$saison;
 							}
-							echo "<p class='nomepisode'>Episode n°".$res2[1]." : ".$res2[0]."</p>";
+							$chaine3 = "SELECT * FROM usersepisodes WHERE usersepisodes.episode_id = '$value[3]'";
+							$req3 = $bdd->query($chaine3);
+							$int = $req3->rowCount();
+							if ($int > 0) {
+								echo "<p hidden class='nomepisodevu'>Episode n°".$value[1]." : ".$value[0]."</p>";
+							} else {
+								echo "<p hidden class='nomepisodepasvu'>Episode n°".$value[1]." : ".$value[0]."</p>";
+							}
 						}
-						echo "</div>";
+						echo "</div></div>";
 					}
 				}
 			?>
@@ -143,4 +153,6 @@
 			}
 		?>
     </body>
+        <script type="text/javascript" src="javascript/jquery.js"></script>
+        <script type="text/javascript"  src="javascript/series.js"></script>
 </html>

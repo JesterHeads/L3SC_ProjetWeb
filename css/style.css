@@ -187,7 +187,7 @@ body {
 	border: 1px solid #011358;
 }
 
-.nomepisode {
+.nomepisode, .nomepisodevu, .nomepisodepasvu {
 	background:#2B2B2B;
 	padding:2px;
 }
@@ -202,4 +202,8 @@ body {
 	height:400px;
 	margin-left:auto;
 	margin-right:auto;
+}
+
+.nomepisodepasvu {
+	opacity:0.3;
 }
