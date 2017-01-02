@@ -37,9 +37,9 @@
 				?>
                 </li>
                 <li><a href="deconnexion.php" title="Se deconnecter"> Se deconnecter </a></li>
-                <li><a href="compte.html" title="Mon compte"> Mon Compte </a></li>
+                <li><a href="" title="Mon compte"> Mon Compte </a></li>
                 <li><a href="series.html" title="Mes series"> Mes séries </a></li>
-                <li><a href="recommandations.html" title="Mes recommandations"> Mes recommandations</a></li>
+                <li><a href="" title="Mes recommandations"> Mes recommandations</a></li>
                 <!-- Uniquement lorsque l'utilisateur est connecté à son compte -->
             </ul>
         </div>

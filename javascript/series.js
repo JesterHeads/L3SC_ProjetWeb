@@ -1,7 +1,4 @@
 
-
-
-
 $('.serie').click(function(){
         $(this).children().show();
 });
@@ -20,3 +17,22 @@ $('.serie').mouseleave(function(){
     $('.numsaison').children().hide();
 
 });
+
+
+function ajout_ep(episodevu){
+	$.get(
+		'episodesusers.php',
+		{
+		idepisode : episodevu
+		},
+		nom_fonction_retour(episodevu),
+		'int'
+	);
+}
+
+function nom_fonction_retour(id) {
+	console.log('#'+id);
+	document.getElementById(id).value = 'Episodes vu.';
+	document.getElementById(id).disabled = true;
+}
+

@@ -37,9 +37,9 @@
 				?>
                 </li>
                 <li><a href="deconnexion.php" title="Se deconnecter"> Se deconnecter </a></li>
-                <li><a href="compte.html" title="Mon compte"> Mon Compte </a></li>
+                <li><a href="" title="Mon compte"> Mon Compte </a></li>
                 <li><a href="series.html" title="Mes series"> Mes séries </a></li>
-                <li><a href="recommandations.html" title="Mes recommandations"> Mes recommandations</a></li>
+                <li><a href="" title="Mes recommandations"> Mes recommandations</a></li>
                 <!-- Uniquement lorsque l'utilisateur est connecté à son compte -->
             </ul>
         </div>
@@ -245,7 +245,7 @@
 					}
 				} else if (($_GET['recherche'] == "A") || ($_GET['recherche'] == "B") || ($_GET['recherche'] == "C") || ($_GET['recherche'] == "D") || ($_GET['recherche'] == "E") || ($_GET['recherche'] == "F") || ($_GET['recherche'] == "G") || ($_GET['recherche'] == "H") || ($_GET['recherche'] == "I") || ($_GET['recherche'] == "J") || ($_GET['recherche'] == "K") || ($_GET['recherche'] == "L") || ($_GET['recherche'] == "M") || ($_GET['recherche'] == "N") || ($_GET['recherche'] == "O") || ($_GET['recherche'] == "P") || ($_GET['recherche'] == "Q") || ($_GET['recherche'] == "R") || ($_GET['recherche'] == "S") || ($_GET['recherche'] == "T") || ($_GET['recherche'] == "U") || ($_GET['recherche'] == "V") || ($_GET['recherche'] == "W") || ($_GET['recherche'] == "X") || ($_GET['recherche'] == "Y")|| ($_GET['recherche'] == "Z")){
 					$lettre = $_GET['recherche'];
-					$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$lettre%' ORDER BY series.name";
+					$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path, episodes.id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$lettre%' ORDER BY series.name";
 					$req = $bdd->query($chaine);
 					$int = $req->rowCount();
 					if ($int > 0) {
@@ -280,6 +280,9 @@
 									echo "<div hidden class='numsaison'> Saison n°".$saison;
 								}
 								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+								if(isset($_SESSION['user']) || !empty($_SESSION['user'])){
+									echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+								}
 							}
 						}
 						echo "</div></div></div>";
