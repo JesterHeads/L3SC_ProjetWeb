@@ -17,6 +17,28 @@
 		
 			//Démarrage ou restauration de la session
 			session_start();
+			
+			//renvoie l'id de l'utilisateur connecté 
+			function idUsers() {
+				$user = $_SESSION['user'];
+				$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+				$reqUser = $bdd->query($chaineUser);
+				$resUser = $reqUser->fetch();
+				return $resUser[0];
+			}
+			
+			function addButton($id_episode) {
+				$id_user = idUsers();
+				$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+				$reqButton = $bdd->query($chaineButton);
+				$int = $reqButton->rowCount();
+				if ($int > 0) {
+					echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+				} else {
+					echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+				}
+			}
+						
 			if(!isset($_SESSION['user']) || empty($_SESSION['user'])){
 		?>
         <div id="onglets">
@@ -121,7 +143,7 @@
 					$alphabet = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 					for ($i = 0; $i < 36; $i++) {
 						$lettre = $alphabet[$i];
-						$chaine = "SELECT series.name,series.number_of_seasons, series.number_of_episodes,series.overview,series.popularity,series.poster_path, episodes.name, episodes.number, seriesseasons.season_id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$lettre%' ORDER BY series.name";
+						$chaine = "SELECT series.name,series.number_of_seasons, series.number_of_episodes,series.overview,series.popularity,series.poster_path, episodes.name, episodes.number, seriesseasons.season_id, episodes.id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$lettre%' ORDER BY series.name";
 						$req = $bdd->query($chaine);
 						$int = $req->rowCount();
 						if ($int > 0) {
@@ -146,6 +168,25 @@
 									echo "<p hidden>Nombre de saisons :".$value[1]." Nombre d'épisodes :".$value[2]."<br>Résumé : ".$value[3]."<br>Popularité : ".$value[4]."</p>";
 									echo "<div hidden class='numsaison'> Saison n°".$saison;
 									echo "<p hidden class='nomepisode'>Episode n°".$value[7]." : ".$value[6]."</p>";
+									if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+										//texte brut car problème avec la fonction
+										//$id_user = idUsers();
+										$user = $_SESSION['user'];
+										$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+										$reqUser = $bdd->query($chaineUser);
+										$resUser = $reqUser->fetch();
+										$id_user = $resUser[0];
+										$id_episode = $value[9];
+										//addButton($id_user, $id_episode);
+										$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+										$reqButton = $bdd->query($chaineButton);
+										$intButton = $reqButton->rowCount();
+										if ($intButton > 0) {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+										} else {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+										}
+									}
 								} else {
 									if ($value[8] != $comparesaison) {
 										echo "</div>";
@@ -154,6 +195,25 @@
 										echo "<div hidden class='numsaison'> Saison n°".$saison;
 									}
 									echo "<p hidden class='nomepisode'>Episode n°".$value[7]." : ".$value[6]."</p>";
+									if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+										//texte brut car problème avec la fonction
+										//$id_user = idUsers();
+										$user = $_SESSION['user'];
+										$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+										$reqUser = $bdd->query($chaineUser);
+										$resUser = $reqUser->fetch();
+										$id_user = $resUser[0];
+										$id_episode = $value[9];
+										//addButton($id_user, $id_episode);
+										$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+										$reqButton = $bdd->query($chaineButton);
+										$intButton = $reqButton->rowCount();
+										if ($intButton > 0) {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+										} else {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+										}
+									}
 								}
 							}
 							echo "</div></div></div>";
@@ -163,7 +223,7 @@
 					$genres = ["Action","Adventure","Action & Adventure","Animation","Comedy","Crime","Documentary","Drama","Family","Fantasy","History","Horror","Kids","Music","Mystery","Reality","Romance","News","Science Fiction","Sci-Fi & Fantasy","Soap","Talk","Thriller","TV Movie","War","War & Politics","Western"];
 					for ($i = 0; $i < 27; $i++) {
 						$genre =  $genres[$i];
-						$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path FROM seriesgenres, series, genres, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND genres.name = '$genre' AND genres.id = seriesgenres.genre_id AND seriesgenres.series_id = series.id ORDER BY series.name";
+						$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path, episodes.id FROM seriesgenres, series, genres, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND genres.name = '$genre' AND genres.id = seriesgenres.genre_id AND seriesgenres.series_id = series.id ORDER BY series.name";
 						$req = $bdd->query($chaine);
 						$int = $req->rowCount();
 						if ($int > 0) {
@@ -188,6 +248,25 @@
 									echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
 									echo "<div hidden class='numsaison'> Saison n°".$saison;
 									echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+									if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+										//texte brut car problème avec la fonction
+										//$id_user = idUsers();
+										$user = $_SESSION['user'];
+										$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+										$reqUser = $bdd->query($chaineUser);
+										$resUser = $reqUser->fetch();
+										$id_user = $resUser[0];
+										$id_episode = $value[9];
+										//addButton($id_user, $id_episode);
+										$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+										$reqButton = $bdd->query($chaineButton);
+										$intButton = $reqButton->rowCount();
+										if ($intButton > 0) {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+										} else {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+										}
+									}
 								} else {
 									if ($value[3] != $comparesaison) {
 										echo "</div>";
@@ -196,6 +275,25 @@
 										echo "<div hidden class='numsaison'> Saison n°".$saison;
 									}
 									echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+									if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+										//texte brut car problème avec la fonction
+										//$id_user = idUsers();
+										$user = $_SESSION['user'];
+										$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+										$reqUser = $bdd->query($chaineUser);
+										$resUser = $reqUser->fetch();
+										$id_user = $resUser[0];
+										$id_episode = $value[9];
+										//addButton($id_user, $id_episode);
+										$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+										$reqButton = $bdd->query($chaineButton);
+										$intButton = $reqButton->rowCount();
+										if ($intButton > 0) {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+										} else {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+										}
+									}
 								}
 							}
 							echo "</div></div></div>";
@@ -203,7 +301,7 @@
 					}
 				} else if ($_GET['recherche'] == "0") {
 					for ($i = 0; $i < 10; $i++) {
-						$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$i%' ORDER BY series.name";
+						$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path, episodes.id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$i%' ORDER BY series.name";
 						$req = $bdd->query($chaine);
 						$int = $req->rowCount();
 						if ($int > 0) {
@@ -230,6 +328,25 @@
 									echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
 									echo "<div hidden class='numsaison'> Saison n°".$saison;
 									echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+									if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+										//texte brut car problème avec la fonction
+										//$id_user = idUsers();
+										$user = $_SESSION['user'];
+										$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+										$reqUser = $bdd->query($chaineUser);
+										$resUser = $reqUser->fetch();
+										$id_user = $resUser[0];
+										$id_episode = $value[9];
+										//addButton($id_user, $id_episode);
+										$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+										$reqButton = $bdd->query($chaineButton);
+										$intButton = $reqButton->rowCount();
+										if ($intButton > 0) {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+										} else {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+										}
+									}
 								} else {
 									if ($value[3] != $comparesaison) {
 										echo '</div>';
@@ -238,6 +355,25 @@
 										echo "<div hidden class='numsaison'> Saison n°".$saison;
 									}
 									echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+									if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+										//texte brut car problème avec la fonction
+										//$id_user = idUsers();
+										$user = $_SESSION['user'];
+										$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+										$reqUser = $bdd->query($chaineUser);
+										$resUser = $reqUser->fetch();
+										$id_user = $resUser[0];
+										$id_episode = $value[9];
+										//addButton($id_user, $id_episode);
+										$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+										$reqButton = $bdd->query($chaineButton);
+										$intButton = $reqButton->rowCount();
+										if ($intButton > 0) {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+										} else {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+										}
+									}
 								}
 							}
 							echo "</div></div></div>";
@@ -272,6 +408,25 @@
 								echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
 								echo "<div hidden class='numsaison'> Saison n°".$saison;
 								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+								if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+										//texte brut car problème avec la fonction
+										//$id_user = idUsers();
+										$user = $_SESSION['user'];
+										$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+										$reqUser = $bdd->query($chaineUser);
+										$resUser = $reqUser->fetch();
+										$id_user = $resUser[0];
+										$id_episode = $value[9];
+										//addButton($id_user, $id_episode);
+										$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+										$reqButton = $bdd->query($chaineButton);
+										$intButton = $reqButton->rowCount();
+										if ($intButton > 0) {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+										} else {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+										}
+									}
 							} else {
 								if ($value[3] != $comparesaison) {
 									echo '</div>';
@@ -280,8 +435,24 @@
 									echo "<div hidden class='numsaison'> Saison n°".$saison;
 								}
 								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
-								if(isset($_SESSION['user']) || !empty($_SESSION['user'])){
-									echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+								if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+									//texte brut car problème avec la fonction
+									//$id_user = idUsers();
+									$user = $_SESSION['user'];
+									$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+									$reqUser = $bdd->query($chaineUser);
+									$resUser = $reqUser->fetch();
+									$id_user = $resUser[0];
+									$id_episode = $value[9];
+									//addButton($id_user, $id_episode);
+									$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+									$reqButton = $bdd->query($chaineButton);
+									$intButton = $reqButton->rowCount();
+									if ($intButton > 0) {
+										echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+									} else {
+										echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+									}
 								}
 							}
 						}
@@ -297,7 +468,7 @@
 					} else {
 						$genre = $_GET['recherche'];	
 					}
-					$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path FROM seriesgenres, series, genres, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND genres.name = '$genre' AND genres.id = seriesgenres.genre_id AND seriesgenres.series_id = series.id ORDER BY series.name";
+					$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path, episodes.id FROM seriesgenres, series, genres, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND genres.name = '$genre' AND genres.id = seriesgenres.genre_id AND seriesgenres.series_id = series.id ORDER BY series.name";
 					$req = $bdd->query($chaine);
 					$int = $req->rowCount();
 					if ($int > 0) {
@@ -322,6 +493,25 @@
 								echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
 								echo "<div hidden class='numsaison'> Saison n°".$saison;
 								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+								if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+										//texte brut car problème avec la fonction
+										//$id_user = idUsers();
+										$user = $_SESSION['user'];
+										$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+										$reqUser = $bdd->query($chaineUser);
+										$resUser = $reqUser->fetch();
+										$id_user = $resUser[0];
+										$id_episode = $value[9];
+										//addButton($id_user, $id_episode);
+										$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+										$reqButton = $bdd->query($chaineButton);
+										$intButton = $reqButton->rowCount();
+										if ($intButton > 0) {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+										} else {
+											echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+										}
+									}
 							} else {
 								if ($value[3] != $comparesaison) {
 									echo "</div>";
@@ -330,12 +520,30 @@
 									echo "<div hidden class='numsaison'> Saison n°".$saison;
 								}
 								echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+								if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+									//texte brut car problème avec la fonction
+									//$id_user = idUsers();
+									$user = $_SESSION['user'];
+									$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+									$reqUser = $bdd->query($chaineUser);
+									$resUser = $reqUser->fetch();
+									$id_user = $resUser[0];
+									$id_episode = $value[9];
+									//addButton($id_user, $id_episode);
+									$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+									$reqButton = $bdd->query($chaineButton);
+									$intButton = $reqButton->rowCount();
+									if ($intButton > 0) {
+										echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+									} else {
+										echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+									}
+								}
 							}
 						}
 						echo "</div></div></div>";
 					}
 				}
-				
 			?>
         </div>
         <footer>
