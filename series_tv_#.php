@@ -163,30 +163,84 @@
 					$genres = ["Action","Adventure","Action & Adventure","Animation","Comedy","Crime","Documentary","Drama","Family","Fantasy","History","Horror","Kids","Music","Mystery","Reality","Romance","News","Science Fiction","Sci-Fi & Fantasy","Soap","Talk","Thriller","TV Movie","War","War & Politics","Western"];
 					for ($i = 0; $i < 27; $i++) {
 						$genre =  $genres[$i];
-						$chaine = "SELECT series.name FROM seriesgenres, series, genres WHERE genres.name = '$genre' AND genres.id = seriesgenres.genre_id AND seriesgenres.series_id = series.id ORDER BY series.name";
+						$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path FROM seriesgenres, series, genres, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND genres.name = '$genre' AND genres.id = seriesgenres.genre_id AND seriesgenres.series_id = series.id ORDER BY series.name";
 						$req = $bdd->query($chaine);
 						$int = $req->rowCount();
 						if ($int > 0) {
 							echo "<div class='step'>";
 							echo "<h4>".$genre."</h4>";
-							while ($res = $req->fetch()) {
-								echo "<p>".$res[0]."</p>";
+							$res = $req->fetchAll();
+							$compareserie = $res[0][0];
+							$premierAffiche=$urlImg.$res[0][8];
+							echo "<div class='serie'>" . $compareserie."<br><img hidden src='$premierAffiche' alt='affiche de la série'>";
+							echo "<p hidden>Nombre de saisons :".$res[0][5]." Nombre d'épisodes :".$res[0][4]."<br>Résumé : ".$res[0][6]."<br>Popularité : ".$res[0][7]."</p>";
+							$comparesaison = -1;
+							$saison = 0;
+							echo "<div hidden class='numsaison'>";
+							foreach($res as $value) {
+								if ($compareserie != $value[0]) {
+									echo "</div></div>"; //fermeture de la div de la serie précédente
+									$compareserie = $value[0];
+									$saison=1;
+									$comparesaison = $value[3];
+									$afficheSerie=$urlImg.$value[8];
+									echo "<div class='serie'>" . $compareserie."<br><img hidden src='$afficheSerie' alt='affiche de la série'>";
+									echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
+									echo "<div hidden class='numsaison'> Saison n°".$saison;
+									echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+								} else {
+									if ($value[3] != $comparesaison) {
+										echo "</div>";
+										$comparesaison = $value[3];
+										$saison++;
+										echo "<div hidden class='numsaison'> Saison n°".$saison;
+									}
+									echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+								}
 							}
-							echo "</div>";
+							echo "</div></div></div>";
 						}
 					}
 				} else if ($_GET['recherche'] == "0") {
 					for ($i = 0; $i < 10; $i++) {
-						$chaine = "SELECT name FROM series WHERE name LIKE '$i%' ORDER BY name";
+						$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$i%' ORDER BY series.name";
 						$req = $bdd->query($chaine);
 						$int = $req->rowCount();
 						if ($int > 0) {
 							echo "<div class='step'>";
 							echo "<h4>".$i."</h4>";
-							while ($res = $req->fetch()) {
-								echo "<p>".$res[0]."</p>";
+							$res = $req->fetchAll();
+							$compareserie = $res[0][0];
+							$premierAffiche=$urlImg.$res[0][8];
+							$comparesaison = $res[0][3];
+							$saison = 1;
+							echo "<div class='serie'>" . $compareserie."<br><img hidden src='$premierAffiche' alt='affiche de la série'>";
+							echo "<p hidden>Nombre de saisons :".$res[0][5]." Nombre d'épisodes :".$res[0][4]."<br>Résumé : ".$res[0][6]."<br>Popularité : ".$res[0][7]."</p>";
+							$comparesaison = -1;
+							$saison = 0;
+							echo "<div hidden class='numsaison'>";
+							foreach($res as $value) {
+								if ($compareserie != $value[0]) {
+									echo "</div></div>";
+									$compareserie = $value[0];
+									$saison=1;
+									$comparesaison = $value[3];
+									$afficheSerie=$urlImg.$value[8];
+									echo "<div class='serie'>" . $compareserie."<br><img hidden src='$afficheSerie' alt='affiche de la série'>";
+									echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
+									echo "<div hidden class='numsaison'> Saison n°".$saison;
+									echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+								} else {
+									if ($value[3] != $comparesaison) {
+										echo '</div>';
+										$comparesaison = $value[3];
+										$saison++;
+										echo "<div hidden class='numsaison'> Saison n°".$saison;
+									}
+									echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+								}
 							}
-							echo "</div>";
+							echo "</div></div></div>";
 						}
 					}
 				} else if (($_GET['recherche'] == "A") || ($_GET['recherche'] == "B") || ($_GET['recherche'] == "C") || ($_GET['recherche'] == "D") || ($_GET['recherche'] == "E") || ($_GET['recherche'] == "F") || ($_GET['recherche'] == "G") || ($_GET['recherche'] == "H") || ($_GET['recherche'] == "I") || ($_GET['recherche'] == "J") || ($_GET['recherche'] == "K") || ($_GET['recherche'] == "L") || ($_GET['recherche'] == "M") || ($_GET['recherche'] == "N") || ($_GET['recherche'] == "O") || ($_GET['recherche'] == "P") || ($_GET['recherche'] == "Q") || ($_GET['recherche'] == "R") || ($_GET['recherche'] == "S") || ($_GET['recherche'] == "T") || ($_GET['recherche'] == "U") || ($_GET['recherche'] == "V") || ($_GET['recherche'] == "W") || ($_GET['recherche'] == "X") || ($_GET['recherche'] == "Y")|| ($_GET['recherche'] == "Z")){
