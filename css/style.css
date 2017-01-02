@@ -112,14 +112,14 @@ body {
 	border: 1px dashed #EBF2F1;
 }
 
-#description, #topseries, #randseries, #result {
+#description, #topseries, #randseries, #result, #recap, #recapserie {
 	margin-top: 30px;
 	border: 1px dashed #EBF2F1;	
 	color:#FFF;
 	text-align:center;
 }
 
-#description h3, #topseries h3, #randseries h3, #result h3 {
+#description h3, #topseries h3, #randseries h3, #result h3, #recap h3, #recapserie h3 {
 	background:#4E4D4D;
 	margin-top:-20px;
 	margin-left:auto;
@@ -152,6 +152,17 @@ body {
 	font-size:18px;
 }
 
+#recapserie h4 {
+	background:#EBF2F1;
+	color:#000;
+	margin-top:-23px;
+	margin-left:auto;
+	margin-right:auto;
+	width:300px;
+	padding:0.5%;
+	font-size:18px;	
+}
+
 .step {
 	width: 75%;
 	margin-left:auto;
@@ -179,4 +190,16 @@ body {
 .nomepisode {
 	background:#2B2B2B;
 	padding:2px;
+}
+
+.current {
+	font-weight:bold;
+}
+
+#recap img {
+	display:block;
+	width:400px;	
+	height:400px;
+	margin-left:auto;
+	margin-right:auto;
 }

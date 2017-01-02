@@ -21,6 +21,7 @@
 		?>
         <div id="onglets">
             <ul>
+            	<li><a href="series_tv.php" title="Accueil"> Accueil </a></li>
                 <li><a href="connexion.html" title="Se connecter"> Se connecter </a></li>
                 <li><a href="inscription.html" title="S'inscrire"> S'inscrire </a></li>
                 <!-- Uniquement lorsque l'utilisateur n'est pas connecté à son compte -->
@@ -36,10 +37,11 @@
 					echo $_SESSION['user'];
 				?>
                 </li>
-                <li><a href="deconnexion.php" title="Se deconnecter"> Se deconnecter </a></li>
+                <li><a href="series_tv.php" class="current" title="Accueil"> Accueil </a></li>
                 <li><a href="" title="Mon compte"> Mon Compte </a></li>
-                <li><a href="series.html" title="Mes series"> Mes séries </a></li>
+                <li><a href="userseries.php" title="Mes series"> Mes séries </a></li>
                 <li><a href="" title="Mes recommandations"> Mes recommandations</a></li>
+                <li><a href="deconnexion.php" title="Se deconnecter"> Se deconnecter </a></li>
                 <!-- Uniquement lorsque l'utilisateur est connecté à son compte -->
             </ul>
         </div>
@@ -197,7 +199,7 @@
 			?>
             <div class="content">
 				<ul class="links">
-					<li><a href="series_tv.php">Accueil</a></li>
+					<li><a href="series_tv.php" class="current">Accueil</a></li>
                     <li><a href="">Connexion</a></li>
                     <li><a href="">Inscription</a></li>
 				</ul>
@@ -207,9 +209,9 @@
 			?>
             <div class="content">
 				<ul class="links">
-					<li><a href="series_tv.php">Accueil</a></li>
+					<li><a href="series_tv.php" class="current">Accueil</a></li>
                     <li><a href="">Mon compte</a></li>
-                    <li><a href="">Mes séries</a></li>
+                    <li><a href="userseries.php">Mes séries</a></li>
                     <li><a href="">Mes recommandations</a></li>
 				</ul>
 			</div>

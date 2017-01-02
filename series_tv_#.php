@@ -123,8 +123,9 @@
 						
 			if(!isset($_SESSION['user']) || empty($_SESSION['user'])){
 		?>
-        <div id="onglets">
+                <div id="onglets">
             <ul>
+            	<li><a href="series_tv.php" title="Accueil"> Accueil </a></li>
                 <li><a href="connexion.html" title="Se connecter"> Se connecter </a></li>
                 <li><a href="inscription.html" title="S'inscrire"> S'inscrire </a></li>
                 <!-- Uniquement lorsque l'utilisateur n'est pas connecté à son compte -->
@@ -135,15 +136,16 @@
 		?>
         <div id="onglets">
             <ul>
-            	<li>Bonjour 
+            	<li>BONJOUR
                 <?php
 					echo $_SESSION['user'];
 				?>
                 </li>
-                <li><a href="deconnexion.php" title="Se deconnecter"> Se deconnecter </a></li>
+                <li><a href="series_tv.php" class="current" title="Accueil"> Accueil </a></li>
                 <li><a href="" title="Mon compte"> Mon Compte </a></li>
-                <li><a href="series.html" title="Mes series"> Mes séries </a></li>
+                <li><a href="userseries.php" title="Mes series"> Mes séries </a></li>
                 <li><a href="" title="Mes recommandations"> Mes recommandations</a></li>
+                <li><a href="deconnexion.php" title="Se deconnecter"> Se deconnecter </a></li>
                 <!-- Uniquement lorsque l'utilisateur est connecté à son compte -->
             </ul>
         </div>

@@ -1,3 +1,4 @@
+
 <?php	 
 	//On ouvre la bdd
 	require('base.php');
@@ -28,6 +29,5 @@
     	$statement->bindValue(':episode_id', $idepisode, PDO::PARAM_INT);
     	$statement->bindValue(':rating', NULL, PDO::PARAM_INT);
     	$statement->execute();
-		echo "zzzz";
 	}
 ?>
