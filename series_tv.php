@@ -14,7 +14,7 @@
         <?php 
 			//On ouvre la bdd
 			require('base.php');
-		
+
 			//Démarrage ou restauration de la session
 			session_start();
 			if(!isset($_SESSION['user']) || empty($_SESSION['user'])){
@@ -122,45 +122,56 @@
             <!-- On séléctionne arbitrairement trois films qui feront office de notre top
 				Ils ne changent pas -->
             	<?php
-					$chaine = "SELECT * FROM series WHERE name = 'The Simpsons' OR name = 'Futurama' OR  name = 'American Dad!'";
-					$req = $bdd->query($chaine);
+					$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path, episodes.id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name in ('The Simpsons','Futurama','American Dad!')   ";
+                    detailSeries($chaine);
+
+               function detailSeries($query){ //fonction d'affichage du detail des series
+                    global $bdd;
+                    $affiche="https://image.tmdb.org/t/p/w780";
+                    $req = $bdd->query($query);
+                    $int = $req->rowCount();
+                    if ($int > 0) {
+
+                        $res = $req->fetchAll();
+                        $compareserie = $res[0][0];
+                        $afficheSerie=$affiche.$res[0][8];
+                        $comparesaison = $res[0][3];
+                        $saison = 1;
+                        echo "<li><div class='topserie'>" . $compareserie."<br><img class='afficheSerie' src='$afficheSerie' alt='affiche de la série'>";
+                        echo "<p hidden>Nombre de saisons :".$res[0][5]." Nombre d'épisodes :".$res[0][4]."<br>Résumé : ".$res[0][6]."<br>Popularité : ".$res[0][7]."</p>";
+                        $comparesaison = -1;
+                        $saison = 0;
+                        echo "<div hidden class='numsaison'>";
+                        foreach($res as $value) {
+                            if ($compareserie != $value[0]) {
+                                echo "</div></div></li>";
+                                $compareserie = $value[0];
+                                $saison=1;
+                                $comparesaison = $value[3];
+                                $afficheSerie=$affiche.$value[8];
+                                echo "<li><div class='topserie'>" . $compareserie."<br><img class='afficheSerie' src='$afficheSerie' alt='affiche de la série'>";
+                                echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
+                                echo "<div hidden class='numsaison'> Saison n°".$saison;
+                                echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+                            } else {
+                                if ($value[3] != $comparesaison) {
+                                    echo '</div>';
+                                    $comparesaison = $value[3];
+                                    $saison++;
+                                    echo "<div hidden class='numsaison'> Saison n°".$saison;
+                                }
+                                echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+                                if(isset($_SESSION['user']) || !empty($_SESSION['user'])){
+                                    echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+                                }
+                            }
+                        }
+                        echo "</div></div></li>";
+                    }
+
+                }
+
 				?>
-            	<li>
-                	<?php
-						$data = $req->fetch();
-						echo "<p>".$data['name']."</p>";
-						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
-						if ($data['poster_path']==NULL) {
-							echo "<img src='images/indisponible.png'></img>";
-						} else {
-							echo "<img src='$affiche'></img>";
-						}
-					?>
-                </li>
-                <li>
-                    <?php
-						$data = $req->fetch();
-						echo "<p>".$data['name']."</p>";
-						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
-						if ($data['poster_path']==NULL) {
-							echo "<img src='images/indisponible.png'></img>";
-						} else {
-							echo "<img src='$affiche'></img>";
-						}
-					?>
-                </li>
-                <li>
-                    <?php
-						$data = $req->fetch();
-						echo "<p>".$data['name']."</p>";
-						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
-						if ($data['poster_path']==NULL) {
-							echo "<img src='images/indisponible.png'></img>";
-						} else {
-							echo "<img src='$affiche'></img>";
-						}
-					?>
-                </li>
             </ul>
         </div>
         <div id="randseries">
@@ -168,45 +179,15 @@
         	<ul class="rand">
          		<!-- On choisit aléatoirement 3 films à chaque fois que l'on charge la page -->
             	<?php
-					$chaine = "SELECT * FROM series ORDER BY rand()";
-					$req = $bdd->query($chaine);
+                for ($i=0; $i<3; $i++){
+                    $chaine="SELECT DISTINCT name FROM series ORDER BY rand()";
+                    $req = $bdd->query($chaine);
+                    $res = $req->fetchAll();
+                    $nomSerie=$res[0][0];
+                    $chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path, episodes.id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name='$nomSerie'";
+                    detailSeries($chaine);
+                }
 				?>
-            	<li>
-                	<?php
-						$data = $req->fetch();
-						echo "<div>".$data['name']."</div>";
-						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
-						if ($data['poster_path']==NULL) {
-							echo "<img src='images/indisponible.png'></img>";
-						} else {
-							echo "<img src='$affiche'></img>";
-						}
-					?>
-                </li>
-                <li>
-                    <?php
-						$data = $req->fetch();
-						echo "<div>".$data['name']."</div>";
-						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
-						if ($data['poster_path']==NULL) {
-							echo "<img src='images/indisponible.png'></img>";
-						} else {
-							echo "<img src='$affiche'></img>";
-						}
-					?>
-                </li>
-                <li>
-                    <?php
-						$data = $req->fetch();
-						echo "<div>".$data['name']."</div>";
-						$affiche="https://image.tmdb.org/t/p/w780".$data['poster_path'];
-						if ($data['poster_path']==NULL) {
-							echo "<img src='images/indisponible.png'></img>";
-						} else {
-							echo "<img src='$affiche'></img>";
-						}
-					?>
-                </li>
             </ul> 
         </div>
         <footer>

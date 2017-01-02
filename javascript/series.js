@@ -1,7 +1,9 @@
 
-$('.serie').click(function(){
+$('.serie,.topserie').click(function(){
         $(this).children().show();
 });
+
+
 
 $('.numsaison').click(function(){
     $(this).children().show();
@@ -18,6 +20,9 @@ $('.serie').mouseleave(function(){
 
 });
 
+$('.topserie').mouseleave(function(){
+	$('.afficheSerie').siblings().hide();
+});
 
 function ajout_ep(episodevu){
 	$.get(
