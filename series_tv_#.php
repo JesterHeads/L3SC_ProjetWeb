@@ -15,6 +15,7 @@
 			//On ouvre la bdd
 			require('base.php');
 
+
 		function detailSeries($query,$typeRecherche){// fonction d'affichage du détail des séries
 			global $bdd;
 			$urlImg="https://image.tmdb.org/t/p/w300"; //debut de l'url pour afficher le poster correspondant a une série
