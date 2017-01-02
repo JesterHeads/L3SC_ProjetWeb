@@ -43,16 +43,51 @@
 						echo "<p hidden>Nombre de saisons :".$value[5]." Nombre d'épisodes :".$value[4]."<br>Résumé : ".$value[6]."<br>Popularité : ".$value[7]."</p>";
 						echo "<div hidden class='numsaison'> Saison n°".$saison;
 						echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
+						if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+							//texte brut car problème avec la fonction
+							//$id_user = idUsers();
+							$user = $_SESSION['user'];
+							$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+							$reqUser = $bdd->query($chaineUser);
+							$resUser = $reqUser->fetch();
+							$id_user = $resUser[0];
+							$id_episode = $value[9];
+							//addButton($id_user, $id_episode);
+							$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+							$reqButton = $bdd->query($chaineButton);
+							$intButton = $reqButton->rowCount();
+							if ($intButton > 0) {
+								echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+							} else {
+								echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+							}
+						}
 					} else {
 						if ($value[3] != $comparesaison) {
-							echo '</div>';
+							echo "</div>";
 							$comparesaison = $value[3];
 							$saison++;
 							echo "<div hidden class='numsaison'> Saison n°".$saison;
 						}
 						echo "<p hidden class='nomepisode'>Episode n°".$value[2]." : ".$value[1]."</p>";
-						if(isset($_SESSION['user']) || !empty($_SESSION['user'])){
-							echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+						if (isset($_SESSION['user']) || !empty($_SESSION['user'])){
+							//texte brut car problème avec la fonction
+							//$id_user = idUsers();
+							$user = $_SESSION['user'];
+							$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+							$reqUser = $bdd->query($chaineUser);
+							$resUser = $reqUser->fetch();
+							$id_user = $resUser[0];
+							$id_episode = $value[9];
+							//addButton($id_user, $id_episode);
+							$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+							$reqButton = $bdd->query($chaineButton);
+							$intButton = $reqButton->rowCount();
+							if ($intButton > 0) {
+								echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+							} else {
+								echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+							}
 						}
 					}
 				}
@@ -62,6 +97,30 @@
 
 			//Démarrage ou restauration de la session
 			session_start();
+			
+			//renvoie l'id de l'utilisateur connecté 
+			function idUsers() {
+				global $bdd;
+				$user = $_SESSION['user'];
+				$chaineUser = "SELECT * FROM users WHERE name = '$user'";
+				$reqUser = $bdd->query($chaineUser);
+				$resUser = $reqUser->fetch();
+				return $resUser[0];
+			}
+			
+			function addButton($id_episode) {
+				global $bdd;
+				$id_user = idUsers();
+				$chaineButton = "SELECT * FROM usersepisodes WHERE user_id = '$id_user' AND episode_id = '$id_episode'";
+				$reqButton = $bdd->query($chaineButton);
+				$int = $reqButton->rowCount();
+				if ($int > 0) {
+					echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode vu !' disabled='disabled'>";
+				} else {
+					echo "<input type='button' hidden onclick='ajout_ep($value[9])' id='$value[9]' class='episodevu' value='Episode déjà vu ?'>";
+				}
+			}
+						
 			if(!isset($_SESSION['user']) || empty($_SESSION['user'])){
 		?>
         <div id="onglets">
@@ -166,6 +225,7 @@
 					$alphabet = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 					for ($i = 0; $i < 36; $i++) {
 						$lettre = $alphabet[$i];
+
 						$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path, episodes.id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$lettre%' ORDER BY series.name";
 						detailSeries($chaine,$lettre);
 					}
@@ -173,6 +233,7 @@
 					$genres = ["Action","Adventure","Action & Adventure","Animation","Comedy","Crime","Documentary","Drama","Family","Fantasy","History","Horror","Kids","Music","Mystery","Reality","Romance","News","Science Fiction","Sci-Fi & Fantasy","Soap","Talk","Thriller","TV Movie","War","War & Politics","Western"];
 					for ($i = 0; $i < 27; $i++) {
 						$genre =  $genres[$i];
+
 						$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path FROM seriesgenres, series, genres, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND genres.name = '$genre' AND genres.id = seriesgenres.genre_id AND seriesgenres.series_id = series.id ORDER BY series.name";
 						detailSeries($chaine,$genre);
 					}
@@ -184,6 +245,7 @@
 				} else if (($_GET['recherche'] == "A") || ($_GET['recherche'] == "B") || ($_GET['recherche'] == "C") || ($_GET['recherche'] == "D") || ($_GET['recherche'] == "E") || ($_GET['recherche'] == "F") || ($_GET['recherche'] == "G") || ($_GET['recherche'] == "H") || ($_GET['recherche'] == "I") || ($_GET['recherche'] == "J") || ($_GET['recherche'] == "K") || ($_GET['recherche'] == "L") || ($_GET['recherche'] == "M") || ($_GET['recherche'] == "N") || ($_GET['recherche'] == "O") || ($_GET['recherche'] == "P") || ($_GET['recherche'] == "Q") || ($_GET['recherche'] == "R") || ($_GET['recherche'] == "S") || ($_GET['recherche'] == "T") || ($_GET['recherche'] == "U") || ($_GET['recherche'] == "V") || ($_GET['recherche'] == "W") || ($_GET['recherche'] == "X") || ($_GET['recherche'] == "Y")|| ($_GET['recherche'] == "Z")){
 					$lettre = $_GET['recherche'];
 					$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path, episodes.id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name LIKE '$lettre%' ORDER BY series.name";
+
 					detailSeries($chaine,$lettre);
 
 				} else {
@@ -198,6 +260,7 @@
 					}
 					$chaine = "SELECT series.name, episodes.name, episodes.number, seriesseasons.season_id ,series.number_of_episodes,series.number_of_seasons,series.overview,series.popularity,series.poster_path FROM seriesgenres, series, genres, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND genres.name = '$genre' AND genres.id = seriesgenres.genre_id AND seriesgenres.series_id = series.id ORDER BY series.name";
 					detailSeries($chaine,$genre);
+
 				}
 			?>
         </div>
