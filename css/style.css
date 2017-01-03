@@ -1,0 +1,209 @@
+@charset "utf-8";
+/* CSS Document */
+
+h1 {
+    padding-top: 50px;
+    padding-bottom: 40px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #1e1e1e;
+    background-color: #e7e5e4;
+    font-family: 'Gabriela', serif;
+    font-size: 90px;
+    letter-spacing: .10em;
+    text-align: center;
+	text-shadow: 10px 5px 5px #767676;
+}
+
+h2 {
+    padding-top: 5px;
+    padding-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #1e1e1e;
+    background-color: #e7e5e4;
+    font-family: 'Gabriela', serif;
+    font-size: 40px;
+    letter-spacing: .10em;
+    text-align: center;
+}
+
+body {
+	background:#292626;
+}
+
+#onglets {
+	margin-top:10px;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	left: 0;
+	text-align:center;
+	background:#000000;
+}
+#onglets ul li {
+	display:inline-block;
+	padding: 1%;
+	border:1px transparent dashed;
+	text-transform:uppercase;
+	color:#EBF2F1;
+}
+
+#onglets ul li a {
+	text-decoration:none;
+	color:#B9B7B7;
+}
+
+#onglets ul li a:hover {
+	color:#EBF2F1;
+}
+
+#Ralphabet{
+	margin-top: 10px;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	left: 0;
+	text-align:center;
+	background:#000000;
+}
+#Ralphabet ul li {
+	display:inline-block;
+	padding: 1%;
+	border:1px transparent dashed;
+	text-transform:uppercase;
+	color:#EBF2F1;
+}
+
+#Ralphabet ul li a {
+	text-decoration:none;
+	color:#B9B7B7;
+}
+
+#Ralphabet ul li:hover {
+	color:#EBF2F1;
+	border: 1px dashed #EBF2F1;
+}
+
+#Rgenres{
+	margin-top: 2px;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	left: 0;
+	text-align:center;
+	background:#000000;
+}
+#Rgenres ul li {
+	display:inline-block;
+	padding: 1%;
+	border:1px transparent dashed;
+	text-transform:uppercase;
+	color:#EBF2F1;
+}
+
+#Rgenres ul li a {
+	text-decoration:none;
+	color:#B9B7B7;
+}
+
+#Rgenres ul li:hover {
+	color:#EBF2F1;
+	border: 1px dashed #EBF2F1;
+}
+
+#description, #topseries, #randseries, #result, #recap, #recapserie {
+	margin-top: 30px;
+	border: 1px dashed #EBF2F1;	
+	color:#FFF;
+	text-align:center;
+}
+
+#description h3, #topseries h3, #randseries h3, #result h3, #recap h3, #recapserie h3 {
+	background:#4E4D4D;
+	margin-top:-20px;
+	margin-left:auto;
+	margin-right:auto;
+	width:400px;
+	padding:1%;
+}
+
+#topseries ul li, #randseries ul li {
+	display:inline-block;
+	border:1px solid #FFF;
+	text-transform:uppercase;
+	width:25%;
+	padding:2%;
+}
+
+#topseries img, #randseries img {
+	height:400px;
+	width:300px;	
+}
+
+#result h4 {
+	background:#EBF2F1;
+	color:#000;
+	margin-top:-23px;
+	margin-left:auto;
+	margin-right:auto;
+	width:200px;
+	padding:0.5;
+	font-size:18px;
+}
+
+#recapserie h4 {
+	background:#EBF2F1;
+	color:#000;
+	margin-top:-23px;
+	margin-left:auto;
+	margin-right:auto;
+	width:300px;
+	padding:0.5%;
+	font-size:18px;	
+}
+
+.step {
+	width: 75%;
+	margin-left:auto;
+	margin-right:auto;
+	border: 1px dashed #4E4D4D;
+	border-bottom: 1px solid #4E4D4D;
+	padding:1%;
+	margin-bottom:25px;
+}
+
+.serie {
+	width:500px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #636352;	
+}
+
+.numsaison {
+	background:#242424;
+	margin-bottom: 15px;
+	border: 1px solid #011358;
+}
+
+.nomepisode, .nomepisodevu, .nomepisodepasvu {
+	background:#2B2B2B;
+	padding:2px;
+}
+
+.current {
+	font-weight:bold;
+}
+
+#recap img {
+	display:block;
+	width:400px;	
+	height:400px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.nomepisodepasvu {
+	opacity:0.3;
+}
