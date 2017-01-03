@@ -248,16 +248,16 @@
 			?>
 				<ul class="links">
 					<li><a href="series_tv.php">Accueil</a></li>
-                    <li><a href="">Connexion</a></li>
-                    <li><a href="">Inscription</a></li>
+                    <li><a href="connexion.html" title="Se connecter"> Se connecter </a></li>
+               		<li><a href="inscription.html" title="S'inscrire"> S'inscrire </a></li>
 				</ul>
             <?php 
 				} else {
 			?>
 				<ul class="links">
 					<li><a href="series_tv.php">Accueil</a></li>
-                    <li><a href="">Mon compte</a></li>
-                    <li><a href="">Mes séries</a></li>
+                    <li><a href="compteuser.php">Mon compte</a></li>
+                    <li><a href="userseries.php">Mes séries</a></li>
                     <li><a href="">Mes recommandations</a></li>
 				</ul>
 			<?php

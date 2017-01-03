@@ -26,52 +26,29 @@
 				?>
                 </li>
                 <li><a href="series_tv.php" title="Accueil"> Accueil </a></li>
-                <li><a href="compteuser.php" title="Mon compte"> Mon Compte </a></li>
-                <li><a href="userseries.php" class="current" title="Mes series"> Mes séries </a></li>
+                <li><a href="compteuser.php" class="current" title="Mon compte"> Mon Compte </a></li>
+                <li><a href="userseries.php" title="Mes series"> Mes séries </a></li>
                 <li><a href="" title="Mes recommandations"> Mes recommandations</a></li>
                 <li><a href="deconnexion.php" title="Se deconnecter"> Se deconnecter </a></li>
                 <!-- Uniquement lorsque l'utilisateur est connecté à son compte -->
             </ul>
         </div>
 
-        <div id="recapserie">
-        	<h3>Vos séries regardées</h3>
+		<div id="recap">
+        	<h3>Récapitulatif</h3>
             <?php
 				$id_user = idUsers();
-				$chaine = "SELECT series.name, series.poster_path FROM usersepisodes, series, seasonsepisodes, seriesseasons WHERE usersepisodes.user_id = '$id_user' AND usersepisodes.episode_id = seasonsepisodes.episode_id AND seasonsepisodes.season_id = seriesseasons.season_id AND seriesseasons.series_id = series.id ORDER BY series.name";
+				$chaine = "SELECT * FROM usersepisodes WHERE user_id = '$id_user'";
 				$req = $bdd->query($chaine);
-				$serie = "";
-				while ($res = $req->fetch()) {
-					if ($serie != $res[0]) {
-						echo "<div class='step'>";
-						echo "<h4>".$res[0]."</h4>";
-						$serie = $res[0];
-						$chaine2 = "SELECT episodes.name, episodes.number, seriesseasons.season_id, episodes.id FROM series, seriesseasons, seasonsepisodes, episodes WHERE series.id = seriesseasons.series_id AND seriesseasons.season_id = seasonsepisodes.season_id AND seasonsepisodes.episode_id = episodes.id AND series.name = '$res[0]'";
-						$req2 = $bdd->query($chaine2);
-						$res2 = $req2->fetchAll();
-						$comparesaison = -1;
-						$saison = 0;	
-						echo "<div>";													
-						foreach ($res2 as $value) {
-							if ($value[2] != $comparesaison) {
-								echo "</div>";
-								$comparesaison = $value[2];
-								$saison++;
-								echo "<div class='serie'> Saison n°".$saison;
-							}
-							$chaine3 = "SELECT * FROM usersepisodes WHERE usersepisodes.episode_id = '$value[3]'";
-							$req3 = $bdd->query($chaine3);
-							$int = $req3->rowCount();
-							if ($int > 0) {
-								echo "<p hidden class='nomepisodevu'>Episode n°".$value[1]." : ".$value[0]."</p>";
-							} else {
-								echo "<p hidden class='nomepisodepasvu'>Episode n°".$value[1]." : ".$value[0]."</p>";
-							}
-						}
-						echo "</div></div>";
-					}
-				}
+				$series = $req->rowCount();
+				$tps = $series*2727;
+				$temps = $tps % 3600;
+				$h = ( $tps - $temps ) / 3600 ;
+				$s = $temps % 60 ;
+				$m = ( $temps - $s ) / 60;
+				echo "<h4>Tu as passé ".$h." heures, ".$m." minutes et ".$s." secondes devant ton ordinateur. <br> Félicitations !";
 			?>
+            <img src="images/podium.png">
         </div>
         
         <footer>
@@ -79,8 +56,8 @@
             <div class="content">
 				<ul class="links">
 					<li><a href="series_tv.php">Accueil</a></li>
-                    <li><a href="compteuser.php">Mon compte</a></li>
-                    <li><a href="userseries.php" class="current">Mes séries</a></li>
+                    <li><a href="compteuser.php" class="current">Mon compte</a></li>
+                    <li><a href="userseries.php">Mes séries</a></li>
                     <li><a href="">Mes recommandations</a></li>
 				</ul>
 			</div>

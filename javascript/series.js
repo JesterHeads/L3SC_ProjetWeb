@@ -4,7 +4,6 @@ $('.serie,.topserie').click(function(){
 });
 
 
-
 $('.numsaison').click(function(){
     $(this).children().show();
 
